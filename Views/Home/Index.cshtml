@@ -1,0 +1,77 @@
+@model EditorViewModel
+
+<div class="app-shell">
+    <header class="topbar">
+        <h1>PDF Studio Pro</h1>
+        <div class="toolbar-actions">
+            <label class="upload-btn">
+                Upload PDF
+                <input type="file" id="pdfUpload" accept="application/pdf" hidden />
+            </label>
+            <button id="newPdfBtn">New PDF</button>
+            <button id="saveBtn">Save</button>
+            <button id="exportBtn">Export</button>
+            <button id="shareBtn">Share</button>
+            <button id="themeToggle">Dark/Light</button>
+        </div>
+    </header>
+
+    <main class="workspace">
+        <aside class="left-sidebar">
+            <h3>Pages</h3>
+            <div id="thumbnails" class="thumbnail-strip"></div>
+            <h3>Elements</h3>
+            <button data-element="text">Text</button>
+            <button data-element="shape">Shape</button>
+            <button data-element="table">Table</button>
+            <button data-element="image">Image</button>
+            <button data-element="signature">Signature</button>
+            <button data-element="field-text">Text Field</button>
+            <button data-element="field-checkbox">Checkbox</button>
+            <button data-element="field-radio">Radio</button>
+            <button data-element="field-dropdown">Dropdown</button>
+        </aside>
+
+        <section class="editor-area">
+            <div class="editor-toolbar">
+                <button id="zoomOut">-</button>
+                <span id="zoomLabel">100%</span>
+                <button id="zoomIn">+</button>
+                <button id="prevPage">Prev</button>
+                <span id="pageLabel">Page 1/1</span>
+                <button id="nextPage">Next</button>
+                <input id="docSearch" placeholder="Search in document" />
+                <select id="languageSelect">
+                    @foreach (var lang in Model.SupportedLanguages)
+                    {
+                        <option value="@lang">@lang.ToUpperInvariant()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="canvas-wrapper">
+                <canvas id="pdfCanvas"></canvas>
+                <canvas id="editorOverlay"></canvas>
+            </div>
+
+            <div class="advanced-tools">
+                <button id="annotateBtn">Annotate</button>
+                <button id="highlightBtn">Highlight</button>
+                <button id="underlineBtn">Underline</button>
+                <button id="reorderPagesBtn">Reorder Pages</button>
+                <button id="mergeBtn">Merge PDFs</button>
+                <button id="splitBtn">Split PDF</button>
+                <button id="ocrBtn">OCR Extract</button>
+                <button id="compressBtn">Compress</button>
+                <button id="protectBtn">Password Protect</button>
+                <button id="aiSummaryBtn" @(Model.EnableAiSummary ? "" : "disabled")>AI Summary</button>
+            </div>
+        </section>
+
+        <aside class="right-sidebar">
+            <h3>Inspector</h3>
+            <textarea id="notesPanel" placeholder="Comments and annotations..."></textarea>
+            <div id="docInsights" class="insights"></div>
+        </aside>
+    </main>
+</div>
