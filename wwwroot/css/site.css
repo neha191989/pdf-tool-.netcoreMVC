@@ -1,0 +1,89 @@
+:root {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --accent: #2563eb;
+    --border: #e5e7eb;
+}
+
+html[data-theme="dark"] {
+    --bg: #0f172a;
+    --surface: #111827;
+    --text: #f9fafb;
+    --accent: #60a5fa;
+    --border: #374151;
+}
+
+* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--text); }
+
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); background: var(--surface);
+}
+.toolbar-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+button, .upload-btn {
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    padding: 0.45rem 0.65rem; border-radius: 0.5rem; cursor: pointer;
+}
+.upload-btn { display: inline-flex; align-items: center; }
+button:hover, .upload-btn:hover { border-color: var(--accent); }
+
+.workspace {
+    display: grid;
+    grid-template-columns: 220px 1fr 250px;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    flex: 1;
+}
+.left-sidebar, .right-sidebar, .editor-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+}
+
+.thumbnail-strip { display: flex; flex-direction: column; gap: 0.4rem; max-height: 240px; overflow: auto; margin-bottom: 0.8rem; }
+.thumbnail {
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    min-height: 60px;
+    display: grid;
+    place-items: center;
+}
+
+.editor-toolbar { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.6rem; }
+.editor-toolbar input, .editor-toolbar select {
+    border: 1px solid var(--border); border-radius: 0.45rem; padding: 0.4rem;
+    background: transparent; color: inherit;
+}
+
+.canvas-wrapper {
+    position: relative;
+    min-height: 500px;
+    border: 1px dashed var(--border);
+    border-radius: 0.75rem;
+    overflow: auto;
+}
+#pdfCanvas, #editorOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.advanced-tools { margin-top: 0.75rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+#notesPanel {
+    width: 100%;
+    min-height: 280px;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: inherit;
+}
+
+@media (max-width: 1024px) {
+    .workspace { grid-template-columns: 1fr; }
+    .left-sidebar, .right-sidebar { order: 2; }
+    .editor-area { order: 1; }
+}
